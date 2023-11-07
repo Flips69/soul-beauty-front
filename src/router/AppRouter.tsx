@@ -3,7 +3,8 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CadastroServico from "../components/servico/CadastroServico";
 import ListagemServico from "../components/servico/ListagemServico";
-import CadastroProfissional from "../components/servico/CadastroProfissional";
+import CadastroProfissional from "../components/profissionais/CadastroProfissional";
+import ListagemProfissional from "../components/profissionais/ListagemProfissional";
 
 const AppRouter = () => {
     return (
