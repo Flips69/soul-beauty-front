@@ -5,7 +5,7 @@ import styles from "./Header.module.css"
 const Header = () => {
     return (
         <header className={styles.header}>
-            <h1>Buscador de Serviços</h1>
+            <h1>Cadastro de Serviços</h1>
         </header>
     );
 }
