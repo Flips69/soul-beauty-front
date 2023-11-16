@@ -3,11 +3,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #481348;
-    color: #c080e6;
+    background-color: #ea02ea;
+    color: #fff;
 }
 
 .footer span {
     font-weight: bold;
-    color: #c080e6;
+    color: #fff;
 }
