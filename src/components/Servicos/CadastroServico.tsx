@@ -29,8 +29,8 @@ const CadastroServico = () => {
                 "Content-Type": "application/json"
             }
         }).then(function(response){
-            console.log(response.data)
-          window.location.href = "/listagemServico";
+            console.log(response)
+            window.location.href = "/listagemServico";
         }).catch(function(error){
             console.log(error);
         });

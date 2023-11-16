@@ -52,7 +52,7 @@ const ListagemCliente = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://localhost:8000/api/cliente/retornarTodos/');
+                const response = await axios.get('http://localhost:8000/api/cliente/retornarClientes/');
                 setClientes(response.data.data);
 
             } catch (error) {
