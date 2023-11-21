@@ -43,7 +43,7 @@ const CadastroProfissional = () => {
         salario: salario 
         }
 
-        axios.post('http://localhost:8000/api/profissional/store',
+        axios.post('http://127.0.0.1:8000/api/profissional/store',
         dados,
         {
             headers: {

@@ -65,7 +65,7 @@ const EditarCliente = () => {
     useEffect(() => {
         async function fetchData() {
             try{
-                const response = await axios.get("http://127.0.0.1:8000/api/cliente/find/" + parametro.id);
+                const response = await axios.get("http://127.0.0.1:8000/api/cliente/find/"+parametro.id);
                 setNome(response.data.data.nome);
                 setCelular(response.data.data.celular);
                 setEmail(response.data.data.email);
