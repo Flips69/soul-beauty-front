@@ -24,6 +24,29 @@ const EditarCliente = () => {
     const [password, setPassword] = useState<string>("");
     const [id, setId] = useState<number>();
 
+    const findCep = (e: FormEvent) => {
+        e.preventDefault();
+
+        fetch('https://viacep.com.br/ws/'+cep+'/json',
+        {
+            method: 'GET'
+        }).then(Response => Response.json())
+        .then(
+            data => {
+
+                
+                setCidade(data.localidade);
+                setComplemento(data.complemento);
+                setBairro(data.bairro);
+                setRua(data.logradouro)
+                setEstado(data.uf);
+                
+            }
+        ).catch(error => {
+            console.log("Pesquisa Inválida");
+        });
+
+    }
 
     const parametro = useParams();
 
@@ -282,6 +305,7 @@ const EditarCliente = () => {
                                     <label htmlFor="cep" className='form-label'>CEP</label>
                                     <input type="text"
                                         name='cep'
+                                        onBlur={findCep}
                                         className='form-control'
                                         required
                                         onChange={handleState}
