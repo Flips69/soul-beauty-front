@@ -33,8 +33,10 @@ const CadastroCliente = () => {
         }).then(Response => Response.json())
         .then(
             data => {
+
+                
                 setCidade(data.localidade);
-                setCep(data.cep);
+                
                 setEstado(data.uf);
                 setErro("");
             }
@@ -72,8 +74,11 @@ const CadastroCliente = () => {
                 "Content-Type": "application/json"
             }
         }).then(function(response){
-            console.log(response.data)
-          window.location.href = "/listagemCliente";
+            if(response.data.status === true){
+                console.log(response.data.data)
+                window.location.href = "/listagemCliente";
+            }
+           else{  console.log("error");}
         }).catch(function(error){
             console.log(error);
         });
@@ -201,6 +206,7 @@ return(
                         <label htmlFor="cidade" className='form-label'>Cidade</label>
                         <input type="text" 
                         name="cidade"
+                        value={cidade}
                         className="form-control"
                         required
                         onChange={handleState}
@@ -211,6 +217,7 @@ return(
                         <label htmlFor="estado" className='form-label'>Estado</label>
                         <input type="text" 
                         name="estado"
+                        value={estado}
                         className="form-control"
                         required
                         onChange={handleState}
@@ -261,6 +268,7 @@ return(
                         <label htmlFor="cep" className='form-label'>CEP</label>
                         <input type="text" 
                         name="cep"
+                        onBlur={findCep}
                         className="form-control"
                         required
                         onChange={handleState}

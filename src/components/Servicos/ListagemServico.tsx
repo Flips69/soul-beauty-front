@@ -5,6 +5,7 @@ import styles from "../../App.module.css";
 import axios from 'axios';
 import { CadastroServicoInterface } from '../../interfaces/CadastroServicoInterface';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 const ListagemServico = () => {
@@ -64,6 +65,53 @@ const ListagemServico = () => {
         fetchData();
     }, []);
 
+    function handleDelete(id: number) {
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            title: "Tem certeza?",
+            text: "Você não poderá reverter isso!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, exclua-o!",
+            cancelButtonText: "Não, cancele!",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire({
+                    title: "Deletado!",
+                    text: "O serviço foi excluído",
+                    icon: "success"
+                });
+
+                axios.delete('http://127.0.0.1:8000/api/servico/delete/' + id)
+                    .then(function (response) {
+                        window.location.href = "/listagemServico"
+                    }).catch(function (error) {
+                        console.log("ocorreu um erro")
+                    })
+            } else if (
+               
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelado",
+                    text: "O serviço não foi excluído",
+                    icon: "error"
+                });
+            }
+        });
+
+
+
+    }
+
     return (
         <div>
             <main className={styles.main}>
@@ -107,8 +155,8 @@ const ListagemServico = () => {
                                             <td>{servicos.duracao}</td>
                                             <td>{servicos.preco}</td>
                                             <td>
-                                                <Link to={"/servico/editar/" + servicos.id} className='btn btn-primary btn-sm'>Editar</Link>
-                                                <a href="#" className='btn btn-danger btn-sm'>Excluir</a>
+                                                <Link to={"/servico/editar/" + servicos.id} className='btn m-1 btn-primary btn-sm'>Editar</Link>
+                                                <a className='btn btn-danger btn-sm' onClick={() => handleDelete(servicos.id)}>Excluir</a>
                                             </td>
                                         </tr>
                                     ))}

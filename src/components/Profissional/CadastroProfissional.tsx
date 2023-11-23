@@ -22,6 +22,30 @@ const CadastroProfissional = () => {
     const [password, setPassword] = useState<string>("");
     const [salario, setSalario] = useState<string>("");
 
+    const findCep = (e: FormEvent) => {
+        e.preventDefault();
+
+        fetch('https://viacep.com.br/ws/'+cep+'/json',
+        {
+            method: 'GET'
+        }).then(Response => Response.json())
+        .then(
+            data => {
+
+                
+                setCidade(data.localidade);
+                setComplemento(data.complemento);
+                setBairro(data.bairro);
+                setRua(data.logradouro)
+                setEstado(data.uf);
+                
+            }
+        ).catch(error => {
+            console.log("Pesquisa Inválida");
+        });
+
+    }
+
     const CadastroProfissional = (e: FormEvent) => {
         e.preventDefault();
 
@@ -184,6 +208,7 @@ return(
                         <label htmlFor="cidade" className='form-label'>Cidade</label>
                         <input type="text" 
                         name="cidade"
+                        value={cidade}
                         className="form-control"
                         required
                         onChange={handleState}
@@ -194,6 +219,7 @@ return(
                         <label htmlFor="estado" className='form-label'>Estado</label>
                         <input type="text" 
                         name="estado"
+                        value={estado}
                         className="form-control"
                         required
                         onChange={handleState}
@@ -216,6 +242,7 @@ return(
                         name="rua"
                         className="form-control"
                         required
+                        value={rua}
                         onChange={handleState}
                         />
                         </div>
@@ -236,6 +263,7 @@ return(
                         name="bairro"
                         className="form-control"
                         required
+                         value={bairro}
                         onChange={handleState}
                         />
                         </div>
@@ -244,6 +272,7 @@ return(
                         <label htmlFor="cep" className='form-label'>CEP</label>
                         <input type="text" 
                         name="cep"
+                        onBlur={findCep}
                         className="form-control"
                         required
                         onChange={handleState}
@@ -256,6 +285,7 @@ return(
                         name="complemento"
                         className="form-control"
                         required
+                        value={complemento}
                         onChange={handleState}
                         />
                         </div>

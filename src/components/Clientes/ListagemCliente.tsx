@@ -5,6 +5,8 @@ import styles from "../../App.module.css";
 import axios from 'axios';
 import { CadastroClienteInterface } from '../../interfaces/CadastroClienteInterface';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { resolve } from 'path';
 
 
 const ListagemCliente = () => {
@@ -53,7 +55,13 @@ const ListagemCliente = () => {
         async function fetchData() {
             try {
                 const response = await axios.get('http://localhost:8000/api/cliente/retornarClientes/');
-                setClientes(response.data.data);
+                if(response.data.status){
+                    setClientes(response.data.data);
+                }
+                else{
+                    setError("Ocorreu um erro");
+                }
+                
 
             } catch (error) {
                 setError("Ocorreu um erro");
@@ -63,6 +71,53 @@ const ListagemCliente = () => {
 
         fetchData();
     }, []);
+
+    function handleDelete(id: number) {
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            title: "Tem certeza?",
+            text: "Você não poderá reverter isso!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, exclua-o!",
+            cancelButtonText: "Não, cancele!",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire({
+                    title: "Deletado!",
+                    text: "O cliente foi excluido",
+                    icon: "success"
+                });
+
+                axios.delete('http://127.0.0.1:8000/api/cliente/delete/' + id)
+                    .then(function (response) {
+                        window.location.href = "/listagemCliente"
+                    }).catch(function (error) {
+                        console.log("ocorreu um erro")
+                    })
+            } else if (
+               
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelado",
+                    text: "O cliente não foi excluido ",
+                    icon: "error"
+                });
+            }
+        });
+
+
+
+    }
 
     return (
         <div>
@@ -124,7 +179,7 @@ const ListagemCliente = () => {
                                             {/* <td>{clientes.complemento}</td> */}
                                             <td>
                                                 <Link to={"/cliente/editar/" + clientes.id} className='btn btn-primary btn-sm'>Editar</Link>
-                                                <a href="#" className='btn btn-danger btn-sm'>Excluir</a>
+                                                <a className='btn btn-danger btn-sm' onClick={() => handleDelete(clientes.id)}>Excluir</a>
                                             </td>
                                         </tr>
                                     ))}
