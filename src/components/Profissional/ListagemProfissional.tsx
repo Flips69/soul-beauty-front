@@ -51,7 +51,7 @@ const ListagemProfissional = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://localhost:8000/api/profissional/retornarTodos/');
+                const response = await axios.get('http://localhost:8000/api/profissional/retornarProfissionais');
                 setProfissionals(response.data.data);
 
             } catch (error) {
@@ -100,6 +100,7 @@ const ListagemProfissional = () => {
                                         <th>Estado</th>
                                         <th>País</th>
                                         <th>Rua</th>
+                                        <th>Número</th>
                                         <th>Bairro</th>
                                         <th>CEP</th>
                                         {/* <th>Complemento</th> */}
