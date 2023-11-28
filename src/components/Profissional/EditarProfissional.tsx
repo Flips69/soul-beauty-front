@@ -21,7 +21,6 @@ const EditarProfissional = () => {
     const [bairro, setBairro] = useState<string>("");
     const [cep, setCep] = useState<string>("");
     const [complemento, setComplemento] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
     const [salario, setSalario] = useState<string>("");
     const [id, setId] = useState<number>();
 
@@ -69,7 +68,6 @@ const EditarProfissional = () => {
             bairro: bairro,
             cep: cep,
             complemento: complemento,
-            password: password,
             salario: salario 
         }
 
@@ -104,7 +102,6 @@ const EditarProfissional = () => {
                 setBairro(response.data.data.bairro);
                 setCep(response.data.data.cep);
                 setComplemento(response.data.data.complemento);
-                setPassword(response.data.data.password);
                 setSalario(response.data.data.salario);
                 setId(response.data.data.id);
 
@@ -167,10 +164,6 @@ const EditarProfissional = () => {
 
         if(e.target.name === "complemento"){
             setComplemento(e.target.value);
-        }
-
-        if(e.target.name === "password"){
-            setPassword(e.target.value);
         }
 
         if(e.target.name === "salario"){
@@ -329,17 +322,6 @@ const EditarProfissional = () => {
                                         required
                                         onChange={handleState}
                                         value={complemento}
-                                    />
-                                </div>
-
-                                <div className='col-6'>
-                                    <label htmlFor="password" className='form-label'>Senha</label>
-                                    <input type="text"
-                                        name='password'
-                                        className='form-control'
-                                        required
-                                        onChange={handleState}
-                                        value={password}
                                     />
                                 </div>
 
