@@ -11,7 +11,17 @@ const CadastroServico = () => {
     const [duracao, setDuracao] = useState<string>("");
     const [preco, setPreco] = useState<string>("");
 
+    const [nomeErro, setNomeErro] = useState<string>("");
+    const [descricaoErro, setDescricaoErro] = useState<string>("");
+    const [duracaoErro, setDuracaoErro] = useState<string>("");
+    const [precoErro, setPrecoErro] = useState<string>("");
+
     const cadastroServico = (e: FormEvent) => {
+        setNomeErro("")
+        setDescricaoErro("")
+        setDuracaoErro("")
+        setPrecoErro("")
+
         e.preventDefault();
 
         const dados = {
@@ -29,8 +39,23 @@ const CadastroServico = () => {
                 "Content-Type": "application/json"
             }
         }).then(function(response){
-            console.log(response)
-            window.location.href = "/listagemServico";
+            if(response.data.status === false){
+                if('nome' in response.data.error){
+                    setNomeErro(response.data.error.nome[0])
+                }
+                if('descricao' in response.data.error){
+                    setDescricaoErro(response.data.error.descricao[0])
+                }
+                if('duracao' in response.data.error){
+                    setDuracaoErro(response.data.error.duracao[0])
+                }
+                if('preco' in response.data.error){
+                    setPrecoErro(response.data.error.preco[0])
+                }
+            }
+            else { console.log(response)
+
+            window.location.href = "/listagemServico";}
         }).catch(function(error){
             console.log(error);
         });
@@ -73,6 +98,7 @@ const CadastroServico = () => {
                                     required
                                     onChange={handleState}
                                     />
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -83,6 +109,7 @@ const CadastroServico = () => {
                                     required
                                     onChange={handleState}
                                     />
+                                    <div className='text-danger'>{descricaoErro}</div>
                                     </div>
 
                                     <div className='col-6'>
@@ -93,6 +120,7 @@ const CadastroServico = () => {
                                     required
                                     onChange={handleState}
                                     />
+                                    <div className='text-danger'>{duracaoErro}</div>
                                     </div>
 
                                     <div className='col-6'>
@@ -103,6 +131,7 @@ const CadastroServico = () => {
                                     required
                                     onChange={handleState}
                                     />
+                                    <div className='text-danger'>{precoErro}</div>
                                     </div>
 
                                     <div className='col-12'>

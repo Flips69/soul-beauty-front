@@ -24,6 +24,22 @@ const EditarProfissional = () => {
     const [salario, setSalario] = useState<string>("");
     const [id, setId] = useState<number>();
 
+    const [nomeErro, setNomeErro] = useState<string>("");
+    const [celularErro, setCelularErro] = useState<string>("");
+    const [emailErro, setEmailErro] = useState<string>("");
+    const [cpfErro, setCpfErro] = useState<string>("");
+    const [dataNascimentoErro, setDataNascimentoErro] = useState<string>("");
+    const [cidadeErro, setCidadeErro] = useState<string>("");
+    const [estadoErro, setEstadoErro] = useState<string>("");
+    const [paisErro, setPaisErro] = useState<string>("");
+    const [ruaErro, setRuaErro] = useState<string>("");
+    const [numeroErro, setNumeroErro] = useState<string>("");
+    const [bairroErro, setBairroErro] = useState<string>("");
+    const [cepErro, setCepErro] = useState<string>("");
+    const [complementoErro, setComplementoErro] = useState<string>("");
+    const [passwordErro, setPasswordErro] = useState<string>("");
+    const [salarioErro, setSalarioErro] = useState<string>("");
+
     const findCep = (e: FormEvent) => {
         e.preventDefault();
 
@@ -51,6 +67,22 @@ const EditarProfissional = () => {
     const parametro = useParams();
 
     const atualizar = (e: FormEvent) => {
+        setNomeErro("")
+        setCelularErro("")
+        setEmailErro("")
+        setCpfErro("")
+        setDataNascimentoErro("")
+        setCidadeErro("")
+        setEstadoErro("")
+        setPaisErro("")
+        setRuaErro("")
+        setNumeroErro("")
+        setBairroErro("")
+        setCepErro("")
+        setComplementoErro("")
+        setPasswordErro("")
+        setSalarioErro("");
+
         e.preventDefault();
 
         const dados = {
@@ -79,7 +111,56 @@ const EditarProfissional = () => {
                 "Content-Type": "application/json"
             }
         }).then(function(response){
-            window.location.href = "/listagemProfissional";
+            if(response.data.status === false){
+                if('nome' in response.data.error){
+                    setNomeErro(response.data.error.nome[0])
+                }
+                if('celular' in response.data.error){
+                    setCelularErro(response.data.error.celular[0])
+                }
+                if('email' in response.data.error){
+                    setEmailErro(response.data.error.email[0])
+                }
+                if('cpf' in response.data.error){
+                    setCpfErro(response.data.error.cpf[0])
+                }
+                if('dataNascimento' in response.data.error){
+                    setDataNascimentoErro(response.data.error.dataNascimento[0])
+                }
+                if('cidade' in response.data.error){
+                    setCidadeErro(response.data.error.cidade[0])
+                }
+                if('estado' in response.data.error){
+                    setEstadoErro(response.data.error.estado[0])
+                }
+                if('pais' in response.data.error){
+                    setPaisErro(response.data.error.pais[0])
+                }
+                if('rua' in response.data.error){
+                    setRuaErro(response.data.error.rua[0])
+                }
+                if('numero' in response.data.error){
+                    setNumeroErro(response.data.error.numero[0])
+                }
+                if('bairro' in response.data.error){
+                    setBairroErro(response.data.error.bairro[0])
+                }
+                if('cep' in response.data.error){
+                    setCepErro(response.data.error.cep[0])
+                }
+                if('complemento' in response.data.error){
+                    setComplementoErro(response.data.error.complemento[0])
+                }
+                if('password' in response.data.error){
+                    setPasswordErro(response.data.error.password[0])
+                }
+                if('salario' in response.data.error){
+                    setSalarioErro(response.data.error.salario[0])
+                }
+                console.log(response.data.data)
+                
+            }else {
+            window.location.href = "/listagemProfissional";}
         }).catch(function(error){
             console.log('Ocorreu um erro ao atualizar');
         });
@@ -190,7 +271,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={nome}
                                     />
-
+                                <div className='text-danger'>{nomeErro}</div>
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="celular" className='form-label'>Celular</label>
@@ -201,7 +282,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={celular}
                                     />
-
+<div className='text-danger'>{nomeErro}</div>
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="email" className='form-label'>E-mail</label>
@@ -213,7 +294,7 @@ const EditarProfissional = () => {
                                         value={email}
                                     />
                                 </div>
-
+                                <div className='text-danger'>{nomeErro}</div>
                                 <div className='col-6'>
                                     <label htmlFor="cpf" className='form-label'>CPF</label>
                                     <input type="text"
@@ -223,8 +304,9 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={cpf}
                                     />
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
-
+                                <div className='text-danger'>{nomeErro}</div>
                                 <div className='col-6'>
                                     <label htmlFor="dataNascimento" className='form-label'>Data de Nascimento</label>
                                     <input type="text"
@@ -234,6 +316,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={dataNascimento}
                                     />
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -245,6 +328,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={cidade}
                                     />
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -256,6 +340,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={estado}
                                     />
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -267,6 +352,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={pais}
                                     />
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -278,6 +364,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={rua}
                                     />
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -289,6 +376,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={numero}
                                     />
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -300,6 +388,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={bairro}
                                     />
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -312,6 +401,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={cep}
                                     />
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -323,6 +413,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={complemento}
                                     />
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -334,6 +425,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={salario}
                                     />
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
             
                                 <div className='col-12'>
