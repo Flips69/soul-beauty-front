@@ -4,6 +4,7 @@ import Header from "../Clientes/HeaderCliente";
 import styles from "../../App.module.css"
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 const EditarCliente = () => {
@@ -107,7 +108,22 @@ const EditarCliente = () => {
                 "Content-Type": "application/json"
             }
         }).then(function(response){
-            if(response.data.status === false){
+            if(true === response.data.status){
+                Swal.fire({
+                    title: "Editado com sucesso",
+                    text: "redirecionando para a listagem...",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer:3000
+                  });
+
+                  window.setTimeout(()=>{
+                    window.location.href = "/ListagemCliente"
+                  },3600);
+                console.log(response.data)
+                }
+                else{
+            if(response.data.success === false){
                 if('nome' in response.data.error){
                     setNomeErro(response.data.error.nome[0])
                 }
@@ -151,9 +167,10 @@ const EditarCliente = () => {
                     setPasswordErro(response.data.error.password[0])
                 }
                 console.log(response.data.data)
-                
-            }else {
-            window.location.href = "/listagemCliente";}
+            }  
+            } {
+            //window.location.href = "/listagemCliente";
+        }
         }).catch(function(error){
             console.log('Ocorreu um erro ao atualizar');
         });
@@ -308,6 +325,19 @@ const EditarCliente = () => {
                                 </div>
 
                                 <div className='col-6'>
+                                    <label htmlFor="cep" className='form-label'>CEP</label>
+                                    <input type="text"
+                                        name='cep'
+                                        onBlur={findCep}
+                                        className='form-control'
+                                        required
+                                        onChange={handleState}
+                                        value={cep}
+                                    />
+                                    <div className='text-danger'>{cepErro}</div>
+                                </div>
+
+                                <div className='col-6'>
                                     <label htmlFor="cidade" className='form-label'>Cidade</label>
                                     <input type="text"
                                         name='cidade'
@@ -379,18 +409,7 @@ const EditarCliente = () => {
                                     <div className='text-danger'>{bairroErro}</div>
                                 </div>
 
-                                <div className='col-6'>
-                                    <label htmlFor="cep" className='form-label'>CEP</label>
-                                    <input type="text"
-                                        name='cep'
-                                        onBlur={findCep}
-                                        className='form-control'
-                                        required
-                                        onChange={handleState}
-                                        value={cep}
-                                    />
-                                    <div className='text-danger'>{cepErro}</div>
-                                </div>
+                            
 
                                 <div className='col-6'>
                                     <label htmlFor="complemento" className='form-label'>Complemento</label>
