@@ -116,7 +116,7 @@ const ListagemCliente = () => {
             function RedefinirSenha(id: number) {
         const confirm = window.confirm('Deseja redefinir a senha?');
         if (confirm)
-        axios.put('http://127.0.0.1:8000/api/cliente/esqueciSenha/' + id)
+        axios.put('http://127.0.0.1:8000/api/cliente/esqueciMinhaSenha/' + id)
             .then(function (response) {
 
             }).catch(function (error) {
