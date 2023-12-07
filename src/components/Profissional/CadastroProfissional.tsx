@@ -295,7 +295,18 @@ return(
                         <div className='text-danger'>{dataNascimentoErro}</div>
 
                         </div>
+                        <div className='col-3'>
+                        <label htmlFor="cep" className='form-label'>CEP</label>
+                        <input type="text" 
+                        name="cep"
+                        onBlur={findCep}
+                        className="form-control"
+                        required
+                        onChange={handleState}
+                        /> 
+                        <div className='text-danger'>{cepErro}</div>
 
+                        </div>
                 <div className='col-3'>
                         <label htmlFor="cidade" className='form-label'>Cidade</label>
                         <input type="text" 
@@ -372,18 +383,7 @@ return(
 
                         </div>
 
-                <div className='col-3'>
-                        <label htmlFor="cep" className='form-label'>CEP</label>
-                        <input type="text" 
-                        name="cep"
-                        onBlur={findCep}
-                        className="form-control"
-                        required
-                        onChange={handleState}
-                        /> 
-                        <div className='text-danger'>{cepErro}</div>
-
-                        </div>
+                
 
                 <div className='col-3'>
                         <label htmlFor="complemento" className='form-label'>Complemento</label>

@@ -111,7 +111,7 @@ const EditarProfissional = () => {
                 "Content-Type": "application/json"
             }
         }).then(function(response){
-            if(response.data.status === false){
+            if(response.data.success === false){
                 if('nome' in response.data.error){
                     setNomeErro(response.data.error.nome[0])
                 }
@@ -282,7 +282,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={celular}
                                     />
-<div className='text-danger'>{nomeErro}</div>
+<div className='text-danger'>{celularErro}</div>
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="email" className='form-label'>E-mail</label>
@@ -294,7 +294,7 @@ const EditarProfissional = () => {
                                         value={email}
                                     />
                                 </div>
-                                <div className='text-danger'>{nomeErro}</div>
+                                <div className='text-danger'>{emailErro}</div>
                                 <div className='col-6'>
                                     <label htmlFor="cpf" className='form-label'>CPF</label>
                                     <input type="text"
@@ -304,9 +304,9 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={cpf}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{cpfErro}</div>
                                 </div>
-                                <div className='text-danger'>{nomeErro}</div>
+                                
                                 <div className='col-6'>
                                     <label htmlFor="dataNascimento" className='form-label'>Data de Nascimento</label>
                                     <input type="text"
@@ -316,7 +316,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={dataNascimento}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{dataNascimentoErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -328,7 +328,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={cidade}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{cidadeErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -340,7 +340,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={estado}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{estadoErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -352,7 +352,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={pais}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{paisErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -364,7 +364,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={rua}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{ruaErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -376,7 +376,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={numero}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{numeroErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -388,7 +388,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={bairro}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{bairroErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -401,7 +401,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={cep}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{cepErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -413,7 +413,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={complemento}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{complementoErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -425,7 +425,7 @@ const EditarProfissional = () => {
                                         onChange={handleState}
                                         value={salario}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{salarioErro}</div>
                                 </div>
             
                                 <div className='col-12'>

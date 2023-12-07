@@ -45,7 +45,7 @@ const EditarServico = () => {
                 "Content-Type": "application/json"
             }
         }).then(function(response){
-            if(response.data.status === false){
+            if(response.data.success === false){
                 if('nome' in response.data.error){
                     setNomeErro(response.data.error.nome[0])
                 }
@@ -128,7 +128,7 @@ const EditarServico = () => {
                                         onChange={handleState}
                                         value={descricao}
                                     />
-<div className='text-danger'>{nomeErro}</div>
+<div className='text-danger'>{descricaoErro}</div>
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="duracao" className='form-label'>Duração</label>
@@ -139,7 +139,7 @@ const EditarServico = () => {
                                         onChange={handleState}
                                         value={duracao}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{duracaoErro}</div>
                                 </div>
 
                                 <div className='col-6'>
@@ -151,7 +151,7 @@ const EditarServico = () => {
                                         onChange={handleState}
                                         value={preco}
                                     />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{precoErro}</div>
                                 </div>
             
                                 <div className='col-12'>

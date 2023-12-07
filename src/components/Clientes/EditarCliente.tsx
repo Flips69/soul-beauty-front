@@ -42,24 +42,24 @@ const EditarCliente = () => {
     const findCep = (e: FormEvent) => {
         e.preventDefault();
 
-        fetch('https://viacep.com.br/ws/'+cep+'/json',
-        {
-            method: 'GET'
-        }).then(Response => Response.json())
-        .then(
-            data => {
+        fetch('https://viacep.com.br/ws/' + cep + '/json',
+            {
+                method: 'GET'
+            }).then(Response => Response.json())
+            .then(
+                data => {
 
-                
-                setCidade(data.localidade);
-                setComplemento(data.complemento);
-                setBairro(data.bairro);
-                setRua(data.logradouro)
-                setEstado(data.uf);
-                
-            }
-        ).catch(error => {
-            console.log("Pesquisa Inválida");
-        });
+
+                    setCidade(data.localidade);
+                    setComplemento(data.complemento);
+                    setBairro(data.bairro);
+                    setRua(data.logradouro)
+                    setEstado(data.uf);
+
+                }
+            ).catch(error => {
+                console.log("Pesquisa Inválida");
+            });
 
     }
 
@@ -101,85 +101,86 @@ const EditarCliente = () => {
         }
 
         axios.put("http://127.0.0.1:8000/api/cliente/update",
-        dados,
-        {
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            }
-        }).then(function(response){
-            if(true === response.data.status){
-                Swal.fire({
-                    title: "Editado com sucesso",
-                    text: "redirecionando para a listagem...",
-                    icon: "success",
-                    showConfirmButton: false,
-                    timer:3000
-                  });
+            dados,
+            {
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                }
+            }).then(function (response) {
+                if (true == response.data.success) {
+                    Swal.fire({
+                        title: "Editado com sucesso",
+                        text: "redirecionando para a listagem...",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
 
-                  window.setTimeout(()=>{
-                    window.location.href = "/ListagemCliente"
-                  },3600);
-                console.log(response.data)
+                    window.setTimeout(() => {
+                        window.location.href = "/ListagemCliente"
+                    }, 3600);
+                    console.log(response.data)
                 }
-                else{
-            if(response.data.success === false){
-                if('nome' in response.data.error){
-                    setNomeErro(response.data.error.nome[0])
+                else {
+                    
+                    if (response.data.success === false) {
+                        if ('nome' in response.data.error) {
+                            setNomeErro(response.data.error.nome[0])
+                        }
+                        if ('celular' in response.data.error) {
+                            setCelularErro(response.data.error.celular[0])
+                        }
+                        if ('email' in response.data.error) {
+                            setEmailErro(response.data.error.email[0])
+                        }
+                        if ('cpf' in response.data.error) {
+                            setCpfErro(response.data.error.cpf[0])
+                        }
+                        if ('dataNascimento' in response.data.error) {
+                            setDataNascimentoErro(response.data.error.dataNascimento[0])
+                        }
+                        if ('cidade' in response.data.error) {
+                            setCidadeErro(response.data.error.cidade[0])
+                        }
+                        if ('estado' in response.data.error) {
+                            setEstadoErro(response.data.error.estado[0])
+                        }
+                        if ('pais' in response.data.error) {
+                            setPaisErro(response.data.error.pais[0])
+                        }
+                        if ('rua' in response.data.error) {
+                            setRuaErro(response.data.error.rua[0])
+                        }
+                        if ('numero' in response.data.error) {
+                            setNumeroErro(response.data.error.numero[0])
+                        }
+                        if ('bairro' in response.data.error) {
+                            setBairroErro(response.data.error.bairro[0])
+                        }
+                        if ('cep' in response.data.error) {
+                            setCepErro(response.data.error.cep[0])
+                        }
+                        if ('complemento' in response.data.error) {
+                            setComplementoErro(response.data.error.complemento[0])
+                        }
+                        if ('password' in response.data.error) {
+                            setPasswordErro(response.data.error.password[0])
+                        }
+
+                    }
+                } {
+
                 }
-                if('celular' in response.data.error){
-                    setCelularErro(response.data.error.celular[0])
-                }
-                if('email' in response.data.error){
-                    setEmailErro(response.data.error.email[0])
-                }
-                if('cpf' in response.data.error){
-                    setCpfErro(response.data.error.cpf[0])
-                }
-                if('dataNascimento' in response.data.error){
-                    setDataNascimentoErro(response.data.error.dataNascimento[0])
-                }
-                if('cidade' in response.data.error){
-                    setCidadeErro(response.data.error.cidade[0])
-                }
-                if('estado' in response.data.error){
-                    setEstadoErro(response.data.error.estado[0])
-                }
-                if('pais' in response.data.error){
-                    setPaisErro(response.data.error.pais[0])
-                }
-                if('rua' in response.data.error){
-                    setRuaErro(response.data.error.rua[0])
-                }
-                if('numero' in response.data.error){
-                    setNumeroErro(response.data.error.numero[0])
-                }
-                if('bairro' in response.data.error){
-                    setBairroErro(response.data.error.bairro[0])
-                }
-                if('cep' in response.data.error){
-                    setCepErro(response.data.error.cep[0])
-                }
-                if('complemento' in response.data.error){
-                    setComplementoErro(response.data.error.complemento[0])
-                }
-                if('password' in response.data.error){
-                    setPasswordErro(response.data.error.password[0])
-                }
-                console.log(response.data.data)
-            }  
-            } {
-            //window.location.href = "/listagemCliente";
-        }
-        }).catch(function(error){
-            console.log('Ocorreu um erro ao atualizar');
-        });
+            }).catch(function (error) {
+                console.log(error);
+            });
     }
 
     useEffect(() => {
         async function fetchData() {
-            try{
-                const response = await axios.get("http://127.0.0.1:8000/api/cliente/find/"+parametro.id);
+            try {
+                const response = await axios.get("http://127.0.0.1:8000/api/cliente/find/" + parametro.id);
                 setNome(response.data.data.nome);
                 setCelular(response.data.data.celular);
                 setEmail(response.data.data.email);
@@ -195,7 +196,7 @@ const EditarCliente = () => {
                 setComplemento(response.data.data.complemento);
                 setId(response.data.data.id);
 
-            } catch(error){
+            } catch (error) {
                 console.log("erro ao buscar dados de api");
             }
         }
@@ -204,59 +205,59 @@ const EditarCliente = () => {
 
 
     const handleState = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e.target.name === "nome"){
+        if (e.target.name === "nome") {
             setNome(e.target.value);
         }
 
-        if(e.target.name === "celular"){
+        if (e.target.name === "celular") {
             setCelular(e.target.value);
         }
 
-        if(e.target.name === "email"){
+        if (e.target.name === "email") {
             setEmail(e.target.value);
         }
 
-        if(e.target.name === "cpf"){
+        if (e.target.name === "cpf") {
             setCpf(e.target.value);
         }
 
-        if(e.target.name === "dataNascimento"){
+        if (e.target.name === "dataNascimento") {
             setDataNascimento(e.target.value);
         }
 
-        if(e.target.name === "cidade"){
+        if (e.target.name === "cidade") {
             setCidade(e.target.value);
         }
 
-        if(e.target.name === "estado"){
+        if (e.target.name === "estado") {
             setEstado(e.target.value);
         }
 
-        if(e.target.name === "pais"){
+        if (e.target.name === "pais") {
             setPais(e.target.value);
         }
 
-        if(e.target.name === "rua"){
+        if (e.target.name === "rua") {
             setRua(e.target.value);
         }
 
-        if(e.target.name === "numero"){
+        if (e.target.name === "numero") {
             setNumero(e.target.value);
         }
 
-        if(e.target.name === "bairro"){
+        if (e.target.name === "bairro") {
             setBairro(e.target.value);
         }
 
-        if(e.target.name === "cep"){
+        if (e.target.name === "cep") {
             setCep(e.target.value);
         }
 
-        if(e.target.name === "complemento"){
+        if (e.target.name === "complemento") {
             setComplemento(e.target.value);
         }
 
-}
+    }
 
     return (
         <div>
@@ -276,7 +277,7 @@ const EditarCliente = () => {
                                         onChange={handleState}
                                         value={nome}
                                     />
-                                <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{nomeErro}</div>
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="celular" className='form-label'>Celular</label>
@@ -314,7 +315,7 @@ const EditarCliente = () => {
 
                                 <div className='col-6'>
                                     <label htmlFor="dataNascimento" className='form-label'>Data de Nascimento</label>
-                                    <input type="text"
+                                    <input type="date"
                                         name='dataNascimento'
                                         className='form-control'
                                         required
@@ -409,7 +410,7 @@ const EditarCliente = () => {
                                     <div className='text-danger'>{bairroErro}</div>
                                 </div>
 
-                            
+
 
                                 <div className='col-6'>
                                     <label htmlFor="complemento" className='form-label'>Complemento</label>
@@ -423,7 +424,7 @@ const EditarCliente = () => {
                                     <div className='text-danger'>{complementoErro}</div>
                                 </div>
 
-            
+
                                 <div className='col-12'>
                                     <button
                                         type='submit'

@@ -6,7 +6,7 @@ const FooterCliente = () => {
     return (
         <footer className={styles.footer}>
             <p>
-                <span>Buscador de Clientes</span> @ soul-beauty
+                <span>Soul Beauty</span> @ soul-beauty
             </p>
         </footer>
     );
